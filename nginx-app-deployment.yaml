@@ -1,0 +1,23 @@
+apiVersion: apps/v1  # API version for Deployment.
+kind: Deployment  # Resource type: Deployment.
+metadata:
+  name: nginx-deployment  # Name of the Deployment.
+spec:
+  replicas: 1  # Number of desired pod replicas.
+  selector:  # Criteria to identify pods managed by this Deployment.
+    matchLabels:
+      app: nginx  # Pods must have this label.
+  template:  # Pod template for creating replicas.
+    metadata:
+      labels:
+        app: nginx  # Label applied to pods for identification.
+    spec:
+      containers:
+      - name: nginx  # Container name.
+        image: nginx:latest  # Container image to use.
+        ports:
+        - containerPort: 80  # Expose container port 80.
+        resources:  # Resource limits for the container.
+          limits:
+            cpu: "1m"  # Limit: 1 millicore of CPU (very low for demo).
+            memory: "64Mi"  # Limit: 64 MiB of memory.
