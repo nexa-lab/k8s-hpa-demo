@@ -113,6 +113,7 @@ This demo showcases how to set up and test Horizontal Pod Autoscaling (HPA) in a
    ```powershell
    kubectl delete hpa nginx-hpa
    ```
+
 7. Restore to initial state:
    ```powershell
    kubectl delete --all deployments
@@ -130,19 +131,28 @@ This demo showcases how to set up and test Horizontal Pod Autoscaling (HPA) in a
    kubectl get hpa -w
    ```
 
-3. Delete the HPA:
-   ```powershell
-   kubectl delete hpa nginx-hpa
-   ```
-
-4. Run the load test to observe scaling up of pods:
+3. Run the load test to observe scaling up of pods:
    ```powershell
    .\LoadTest.ps1 -targetUrl "http://<NODE_PUBLIC_IP>:30000/" -requests 1000
    ```
 
 5. Verify the number of replicas is increasing during high load.
+   ```powershell
+   kubectl get pods -w
+   ```
 
 6. Stop the load test and observe the pods scaling down when load decreases.
+
+7. Delete the HPA:
+   ```powershell
+   kubectl delete hpa nginx-hpa
+   ```
+
+8. Restore to initial state:
+   ```powershell
+   kubectl delete --all deployments
+   kubectl apply -f ./nginx-app-deployment.yaml
+   ```
 
 ### Step 3: Simulate Load
 1. Simulate traffic load on the Nginx application using a load test script:
