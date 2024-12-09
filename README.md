@@ -145,7 +145,7 @@ This demo showcases how to set up and test Horizontal Pod Autoscaling (HPA) in a
 
 7. Delete the HPA:
    ```powershell
-   kubectl delete hpa nginx-hpa
+   kubectl delete -f ./nginx-app-hpa.yaml
    ```
 
 8. Restore to initial state:
